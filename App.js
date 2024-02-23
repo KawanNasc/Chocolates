@@ -1,38 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Image, ImageBackground, ScrollView, SafeAreaView } from 'react-native';
-export default function App() {
-  
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { useFonts, PTSerif_700Bold_Italic } from '@expo-google-fonts/pt-serif';
+
+import Home from './paginas/Home'; import AoLeite from './paginas/AoLeite'; import Amargo from './paginas/Amargo'; import DeSoja from './paginas/DeSoja';
+
+const Stack = createStackNavigator();
+
+const Navegacao = () => {
+
+  let [fontsLoaded, fontError] = useFonts({ PTSerif_700Bold_Italic }) 
+
+  if (!fontsLoaded && !fontError) { return null; }
+
   return (
 
-    <ScrollView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerMode: "float", headerTintColor: "#D80000", headerStyle: { backgroundColor: "#840000", borderWidth: 10, borderColor: "#4d0000"},  headerTitleAlign: "center", headerTitleStyle: { fontFamily: "PTSerif_700Bold_Italic" } }}>
+    
+        <Stack.Screen name="Tipos de Chocolates" component={Home}></Stack.Screen>      
+        <Stack.Screen name="AoLeite" component={AoLeite}></Stack.Screen>
+        <Stack.Screen name="Amargo" component={Amargo}></Stack.Screen>
+        <Stack.Screen name="DeSoja" component={DeSoja}></Stack.Screen>
 
-      <SafeAreaView style={estilos.tela}>
-        <Text style={{fontSize: 30, color: "#D80000", margin: 15}}> Tipos de chocolate </Text>
-        
-        <Text style={estilos.chocolates}> Ao leite </Text>
-        <Image style={estilos.img} source={require("./assets/chocolates/aoleite.png")}></Image>
-
-        <Text style={estilos.chocolates}>Amargo</Text>
-        <Image style={estilos.img} source={require("./assets/chocolates/amargo.png")}></Image>
-
-        <Text style={estilos.chocolates}>De Soja</Text>
-        <Image style={estilos.img} source={require("./assets/chocolates/desoja.png")}></Image>
-
-        <StatusBar style="auto" />
-      </SafeAreaView>
-
-    </ScrollView>
+      </Stack.Navigator>
+    </NavigationContainer>
 
   );
 
 }
 
-const estilos = StyleSheet.create({
-
-  tela: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#000000' },
-
-  chocolates: { fontFamily: 'Raleway_200ExtraLight', fontSize: 20, color: "#840000", margin: 10 },
-
-  img: { width: 290, borderRadius: 10, height: 190 }
-
-});
+export default Navegacao;
