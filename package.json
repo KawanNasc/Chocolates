@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/jetbrains-mono": "^0.2.3",
+    "@expo-google-fonts/josefin-sans": "^0.2.3",
     "@expo-google-fonts/pacifico": "^0.2.3",
     "@expo-google-fonts/pt-serif": "^0.2.3",
     "@react-navigation/native": "^6.1.10",
